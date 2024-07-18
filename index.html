@@ -7,9 +7,85 @@
     <!-- <link rel="stylesheet" href="node_modules/swiper/swiper-bundle.min.css"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="src/css/style.css">
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body,
+      html {
+        color: white;
+        background: #1e2021;
+        padding: 0;
+        margin: 0;
+        font-family: "Heebo", sans-serif;
+        height: 100%;
+        width: 100%;
+      }
+
+      main {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        display: grid;
+        z-index: 1;
+        /* linear-gradient(rgba(165, 196, 211, 0.3), #293743f2) */
+        background-image: url("https://images.unsplash.com/photo-1721026586200-157849a043d1?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+        background-size: cover;
+        background-position: bottom center;
+      }
+
+      main > .text {
+        place-self: center;
+        text-align: center;
+        max-width: 50vw;
+      }
+
+      .stats {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        z-index: 10;
+        filter: saturate(0);
+      }
+
+      #app canvas {
+        z-index: -1;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        mix-blend-mode: overlay;
+        backdrop-filter: blur(5px);
+      }
+
+      h1 {
+        font-size: 6vw;
+        font-weight: 100;
+        font-family: "Mountains of Christmas", cursive;
+        margin: 0 auto 15px;
+      }
+
+      .dg.ac {
+        z-index: 2 !important;
+      }
+
+      .link {
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: 20px;
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+        color: white;
+      }
+
+    </style>
 </head>
 <body class="relative font-inter antialiased">
-    <div class="background">
+    <!-- <div class="background">
       <div class="swiper mySwiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide">
@@ -26,148 +102,209 @@
           <div class="swiper-button-next"></div>
           <div class="swiper-button-prev"></div>
       </div>
-    </div>
-    <script src="src/js/Particle-animation.js"></script>
+    </div> -->
+    <main id=app>
+      <div class="text">
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="src/images/20240705113917464.jpg" alt="">
+            </div>
+            <div class="swiper-slide">
+              <img src="src/images/20240705113917464.jpg" alt="">
+            </div>
+            <div class="swiper-slide">
+              <img src="src/images/20240705113917464.jpg" alt="">
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+          <!-- <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div> -->
+      </div>
+      </div>
+    </main>
+    <!-- <script src="src/js/Particle-animation.js"></script> -->
     <!-- <script src="node_modules/swiper/swiper-bundle.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/sparticles@1.3.0/dist/sparticles.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
     <script>
 
         var swiper = new Swiper(".mySwiper", {
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
+            // navigation: {
+            //     nextEl: ".swiper-button-next",
+            //     prevEl: ".swiper-button-prev",
+            // },
             pagination: {
                 el: ".swiper-pagination",
                 clickable: true,
-                loop: true,
                 renderBullet: function (index, className) {
                 return '<span class="' + className + '">' + (index + 1) + "</span>";
                 },
             },
+            loop: true,
             autoplay: {
               delay: 6000,
             },
         });
 
-        class Particle {
-          constructor(svg, coordinates, friction) {
-            this.svg = svg;
-            this.steps = $(window).height() / 2;
-            this.item = null;
-            this.friction = friction;
-            this.coordinates = coordinates;
-            this.position = this.coordinates.y;
-            this.dimensions = this.render();
-            this.rotation = Math.random() > 0.5 ? "-" : "+";
-            this.scale = 0.5 + Math.random();
-            this.siner = 200 * Math.random();
+        let colorType = {
+          type: "multi"
+        };
+
+        let colors = {
+          color1: "rgba(255,255,255,1)",
+          color2: "rgba(233,239,250,1)",
+          color3: "rgba(222,241,250,1)",
+          color4: "rgba(178,209,219,1)",
+          color5: "rgba(135,143,145,1)"
+        };
+
+        let options = {
+          alphaSpeed: 2,
+          alphaVariance: 1,
+          color: [colors.color1, colors.color2, colors.color3, colors.color4],
+          composition: "source-over",
+          count: 120,
+          direction: 160,
+          drift: 2,
+          glow: 50,
+          imageUrl: [
+            "https://assets.codepen.io/13471/snowflake.png",
+            "https://assets.codepen.io/13471/snowflake(1).png",
+            "https://assets.codepen.io/13471/snowflake(2).png",
+            "https://assets.codepen.io/13471/snowflake(3).png",
+            "https://assets.codepen.io/13471/snowflake(4).png",
+            "https://assets.codepen.io/13471/snowflake(5).png",
+            "https://assets.codepen.io/13471/snowflake(6).png",
+            "https://assets.codepen.io/13471/snowflake(7).png",
+            "https://assets.codepen.io/13471/snowflake(8).png",
+          ],
+          maxAlpha: 2,
+          maxSize: 24,
+          minAlpha: -0.2,
+          minSize: 3,
+          parallax: 6,
+          rotation: 0.5,
+          shape: ["diamond"],
+          speed: 2.5,
+          style: "fill",
+          twinkle: false,
+          xVariance: 20,
+          yVariance: 20,
+        };
+
+        window.onload = function() {
+          initStats();
+          initSparticles();
+          initGui();
         }
 
-        destroy() {
-          this.item.remove();
-        }
+        window.initSparticles = function() {
+          var $main = document.querySelector("main");
+          window.mySparticles = new Sparticles($main,options);
+        };
 
-        move() {
-          this.position = this.position - this.friction;
-          let top = this.position;
-          let left =
-            this.coordinates.x +
-            Math.sin((this.position * Math.PI) / this.steps) * this.siner;
-          this.item.css({
-            transform:
-              "translateX(" +
-              left +
-              "px) translateY(" +
-              top +
-              "px) scale(" +
-              this.scale +
-              ") rotate(" +
-              this.rotation +
-              (this.position + this.dimensions.height) +
-              "deg)"
-          });
-
-          if (this.position < -this.dimensions.height) {
-            this.destroy();
-            return false;
-          } else {
-            return true;
+        window.initStats = function() {
+          var stats = new Stats();
+          stats.domElement.classList.add("stats");
+          // document.body.appendChild(stats.domElement);
+          function statsDisplay() {
+            stats.begin();
+            stats.end();
+            requestAnimationFrame(statsDisplay);
           }
-        }
+          requestAnimationFrame(statsDisplay);
+        };
 
-        render() {
-          this.item = $(this.svg, {
-            css: {
-              transform:
-                "translateX(" +
-                this.coordinates.x +
-                "px) translateY(" +
-                this.coordinates.y +
-                "px)"
+        window.initGui = function() {
+          const s = window.mySparticles;
+          const shapes = ["circle", "square", "triangle", "diamond", "line", "image"];
+          const styles = ["fill", "stroke", "both"];
+          const colorOptions = ["single", "multi", "rainbow"];
+          const composites = [
+            "source-over",
+            "source-in",
+            "source-out",
+            "source-atop",
+            "destination-over",
+            "destination-in",
+            "destination-out",
+            "destination-atop",
+            "lighter",
+            "copy",
+            "xor",
+            "multiply",
+            "screen",
+            "overlay",
+            "darken",
+            "color-dodge",
+            "color-burn",
+            "hard-light",
+            "soft-light",
+            "difference",
+            "exclusion",
+            "hue",
+            "saturation",
+            "color",
+            "luminosity"
+          ];
+          const rerender = () => {
+            window.mySparticles.destroy();
+            window.initSparticles();
+          };
+          var rerenderColors = function(v) {
+            if (colorType.type === "rainbow") {
+              options.color = "rainbow";
+            } else if (colorType.type === "single") {
+              options.color = colors.color1;
+            } else {
+              options.color = Object.keys(colors).map(i => {
+                return colors[i];
+              });
             }
-          });
-            $("body").append(this.item);
-            return {
-              width: this.item.width(),
-              height: this.item.height()
-            };
-          }
-        }
+            rerender();
+          };
 
-        const rhombus =
-          '<svg viewBox="0 0 13 14"><path class="rhombus" d="M5.9,1.2L0.7,6.5C0.5,6.7,0.5,7,0.7,7.2l5.2,5.4c0.2,0.2,0.5,0.2,0.7,0l5.2-5.4 C12,7,12,6.7,11.8,6.5L6.6,1.2C6.4,0.9,6.1,0.9,5.9,1.2L5.9,1.2z M3.4,6.5L6,3.9c0.2-0.2,0.5-0.2,0.7,0l2.6,2.6 c0.2,0.2,0.2,0.5,0,0.7L6.6,9.9c-0.2,0.2-0.5,0.2-0.7,0L3.4,7.3C3.2,7.1,3.2,6.8,3.4,6.5L3.4,6.5z" /></svg>';
-
-        const pentahedron =
-          '<svg viewBox="0 0 561.8 559.4"><path class="pentahedron" d="M383.4,559.4h-204l-2.6-0.2c-51.3-4.4-94-37-108.8-83l-0.2-0.6L6,276.7l-0.2-0.5c-14.5-50,3.1-102.7,43.7-131.4 L212.1,23C252.4-7.9,310.7-7.9,351,23l163.5,122.5l0.4,0.3c39,30.3,56,82.6,42.2,130.3l-0.3,1.1l-61.5,198 C480.4,525.6,435.5,559.4,383.4,559.4z M185.5,439.4h195.2l61.1-196.8c0-0.5-0.3-1.6-0.7-2.1L281.5,120.9L120.9,241.2 c0,0.3,0.1,0.7,0.2,1.2l60.8,195.8C182.5,438.5,183.7,439.1,185.5,439.4z M441,240.3L441,240.3L441,240.3z"/></svg>';
-        const x =
-          '<svg viewBox="0 0 12 12"> <path class="x" d="M10.3,4.3H7.7V1.7C7.7,0.8,7,0,6,0S4.3,0.8,4.3,1.7v2.5H1.7C0.8,4.3,0,5,0,6s0.8,1.7,1.7,1.7h2.5v2.5 C4.3,11.2,5,12,6,12s1.7-0.8,1.7-1.7V7.7h2.5C11.2,7.7,12,7,12,6S11.2,4.3,10.3,4.3z"/></svg>';
-
-        const circle =
-          '<svg x="0px" y="0px" viewBox="0 0 13 12"> <path class="circle" d="M6.5,0.1C3.4,0.1,0.8,2.8,0.8,6s2.6,5.9,5.7,5.9s5.7-2.7,5.7-5.9S9.7,0.1,6.5,0.1L6.5,0.1z M6.5,8.8 C5,8.8,3.8,7.6,3.8,6S5,3.2,6.5,3.2S9.2,4.4,9.2,6S8,8.8,6.5,8.8L6.5,8.8z"/> </svg>';
-
-        const point =
-          '<svg viewBox="0 0 12 12"> <path class="point" d="M6,7.5L6,7.5C5.1,7.5,4.5,6.9,4.5,6v0c0-0.9,0.7-1.5,1.5-1.5h0c0.9,0,1.5,0.7,1.5,1.5v0C7.5,6.9,6.9,7.5,6,7.5z "/> </svg>';
-
-        function randomInt(min, max) {
-          return Math.floor(Math.random() * (max - min + 1) + min);
-        }
-
-        const data = [point, rhombus, pentahedron, circle, x];
-
-        let isPaused = false;
-        window.onblur = function () {
-          isPaused = true;
-        }.bind(this);
-        window.onfocus = function () {
-          isPaused = false;
-        }.bind(this);
-
-        let particles = [];
-
-        setInterval(function () {
-          if (!isPaused) {
-            particles.push(
-              new Particle(
-                data[randomInt(0, data.length - 1)],
-                {
-                  x: Math.random() * $(window).width(),
-                  y: $(window).height()
-                },
-                1 + Math.random() * 3
-              )
-            );
-          }
-        }, 200);
-
-        function update() {
-          particles = particles.filter(function (p) {
-            return p.move();
-          });
-          requestAnimationFrame(update.bind(this));
-        }
-        update();
+  // const gui = new dat.GUI({ load: options });
+  // const part = gui.addFolder("Particles");
+  // part.open();
+  // part.add( options, "count", 1, 1500, 1).onFinishChange(rerender);
+  // part.add( options, "shape", shapes).onFinishChange(rerender);
+  // part.add( options, "style", styles).onFinishChange(rerender);
+  // const image = part.addFolder("Image");
+  // // image.add( options, "imageUrl").onFinishChange(rerender);
+  // part.add( options, "minSize", 1, 50, 1).onFinishChange(rerender);
+  // part.add( options, "maxSize", 1, 50, 1).onFinishChange(rerender);
+  // const anim = gui.addFolder("Animation");
+  // anim.add( options, "direction", 0, 360, 1).onFinishChange(rerender);
+  // anim.add( options, "speed", 0, 100, 0.1).onFinishChange(rerender);
+  // anim.add( options, "rotation", 0, 100, 0.1).onFinishChange(rerender);
+  // const move = anim.addFolder("Movement");
+  // move.add( options, "parallax", 0, 10, 0.1).onFinishChange(rerender);
+  // move.add( options, "drift", 0, 10, 0.1).onFinishChange(rerender);
+  // move.add( options, "xVariance", 0, 50, 0.1).onFinishChange(rerender);
+  // move.add( options, "yVariance", 0, 50, 0.1).onFinishChange(rerender);
+  // const vis = gui.addFolder("Visual");
+  // vis.add( options, "glow", 0,50).onFinishChange(rerender);
+  // vis.add( options, "composition", composites).onFinishChange(rerender);
+  // const alpha = vis.addFolder("Alpha");
+  // alpha.add( options, "twinkle").onFinishChange(rerender);
+  // alpha.add( options, "minAlpha", -2, 2, 0.1).onFinishChange(rerender);
+  // alpha.add( options, "maxAlpha", -2, 2, 0.1).onFinishChange(rerender);
+  // alpha.add( options, "alphaSpeed", 0, 50, 1).onFinishChange(rerender);
+  // alpha.add( options, "alphaVariance", 0, 20, 1).onFinishChange(rerender);
+  // const color = vis.addFolder("Color");
+  // color.open();
+  // color.add(colorType, "type", colorOptions).onFinishChange(rerenderColors);
+  // color.addColor(colors, "color1").onFinishChange(rerenderColors);
+  // color.addColor(colors, "color2").onFinishChange(rerenderColors);
+  // color.addColor(colors, "color3").onFinishChange(rerenderColors);
+  // color.addColor(colors, "color4").onFinishChange(rerenderColors);
+  // color.addColor(colors, "color5").onFinishChange(rerenderColors);
+};
 
     </script>
 </body>
