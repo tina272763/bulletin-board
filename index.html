@@ -30,9 +30,14 @@
         display: grid;
         z-index: 1;
         /* linear-gradient(rgba(165, 196, 211, 0.3), #293743f2) */
-        background-image: url("https://images.unsplash.com/photo-1721026586200-157849a043d1?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+        /* background-image: url("https://images.unsplash.com/photo-1721026586200-157849a043d1?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"); */
         background-size: cover;
         background-position: bottom center;
+      }
+
+      .bg-Swiper img{
+        width: 100%;
+        filter: blur(2px);
       }
 
       main > .text {
@@ -85,25 +90,22 @@
     </style>
 </head>
 <body class="relative font-inter antialiased">
-    <!-- <div class="background">
-      <div class="swiper mySwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="src/images/20240705113917464.jpg" alt="">
-            </div>
-            <div class="swiper-slide">
-              <img src="src/images/20240705113917464.jpg" alt="">
-            </div>
-            <div class="swiper-slide">
-              <img src="src/images/20240705113917464.jpg" alt="">
-            </div>
-          </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-      </div>
-    </div> -->
     <main id=app>
+      <div class="background">
+        <div class="swiper bg-Swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <img src="https://images.unsplash.com/photo-1721026586200-157849a043d1?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+              </div>
+              <div class="swiper-slide">
+                <img src="https://images.unsplash.com/photo-1720986073460-d34ea04ac7bb?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+              </div>
+              <div class="swiper-slide">
+                <img src="https://images.unsplash.com/photo-1720549385830-905a78562bbe?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+              </div>
+            </div>
+        </div>
+      </div>
       <div class="text">
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
@@ -146,8 +148,16 @@
             },
             loop: true,
             autoplay: {
-              delay: 6000,
+              delay: 1000,
             },
+        });
+
+        var swiper2 = new Swiper(".bg-Swiper", {
+            loop: true,
+            autoplay: {
+              delay: 1000,
+            },
+            effect: 'fade'
         });
 
         let colorType = {
