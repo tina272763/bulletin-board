@@ -30,14 +30,16 @@
         display: grid;
         z-index: 1;
         /* linear-gradient(rgba(165, 196, 211, 0.3), #293743f2) */
-        /* background-image: url("https://images.unsplash.com/photo-1721026586200-157849a043d1?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"); */
+        background-color: #fff;
+        background-image: url("/src/images/background/bg-1.jpg");
         background-size: cover;
-        background-position: bottom center;
+        background-position: center center;
+        transition: .5s;
       }
 
       .bg-Swiper img{
         width: 100%;
-        filter: blur(2px);
+        filter: blur(3px);
       }
 
       main > .text {
@@ -62,7 +64,7 @@
         bottom: 0;
         right: 0;
         mix-blend-mode: overlay;
-        backdrop-filter: blur(5px);
+        backdrop-filter: blur(4px);
       }
 
       h1 {
@@ -90,22 +92,12 @@
     </style>
 </head>
 <body class="relative font-inter antialiased">
-    <main id=app>
-      <div class="background">
-        <div class="swiper bg-Swiper">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <img src="https://images.unsplash.com/photo-1721026586200-157849a043d1?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
-              </div>
-              <div class="swiper-slide">
-                <img src="https://images.unsplash.com/photo-1720986073460-d34ea04ac7bb?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
-              </div>
-              <div class="swiper-slide">
-                <img src="https://images.unsplash.com/photo-1720549385830-905a78562bbe?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
-              </div>
-            </div>
-        </div>
-      </div>
+    <img src="/src/images/background/bg-1.jpg" style="display: none;" alt="">
+    <img src="/src/images/background/bg-2.jpg" style="display: none;" alt="">
+    <img src="/src/images/background/bg-3.jpg" style="display: none;" alt="">
+    <img src="/src/images/background/bg-4.jpg" style="display: none;" alt="">
+    <img src="/src/images/background/bg-5.jpg" style="display: none;" alt="">
+    <main id="app">
       <div class="text">
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
@@ -133,6 +125,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
     <script>
+        let index = 1;
+        function replaceImage(){
+            const app = document.getElementById('app');
+            index = index < 5 ? index + 1 : 1;
+            app.style.backgroundImage = `url('/src/images/background/bg-${index}.jpg')`;
+        }
+        setInterval(replaceImage, 3000);
 
         var swiper = new Swiper(".mySwiper", {
             // navigation: {
@@ -148,16 +147,8 @@
             },
             loop: true,
             autoplay: {
-              delay: 1000,
+              delay: 2000,
             },
-        });
-
-        var swiper2 = new Swiper(".bg-Swiper", {
-            loop: true,
-            autoplay: {
-              delay: 1000,
-            },
-            effect: 'fade'
         });
 
         let colorType = {
@@ -177,7 +168,7 @@
           alphaVariance: 1,
           color: [colors.color1, colors.color2, colors.color3, colors.color4],
           composition: "source-over",
-          count: 120,
+          count: 80,
           direction: 160,
           drift: 2,
           glow: 50,
@@ -193,12 +184,12 @@
             "https://assets.codepen.io/13471/snowflake(8).png",
           ],
           maxAlpha: 2,
-          maxSize: 24,
+          maxSize: 20,
           minAlpha: -0.2,
           minSize: 3,
           parallax: 6,
           rotation: 0.5,
-          shape: ["diamond"],
+          shape: ["diamond"], // 動畫
           speed: 2.5,
           style: "fill",
           twinkle: false,
@@ -277,44 +268,7 @@
             }
             rerender();
           };
-
-  // const gui = new dat.GUI({ load: options });
-  // const part = gui.addFolder("Particles");
-  // part.open();
-  // part.add( options, "count", 1, 1500, 1).onFinishChange(rerender);
-  // part.add( options, "shape", shapes).onFinishChange(rerender);
-  // part.add( options, "style", styles).onFinishChange(rerender);
-  // const image = part.addFolder("Image");
-  // // image.add( options, "imageUrl").onFinishChange(rerender);
-  // part.add( options, "minSize", 1, 50, 1).onFinishChange(rerender);
-  // part.add( options, "maxSize", 1, 50, 1).onFinishChange(rerender);
-  // const anim = gui.addFolder("Animation");
-  // anim.add( options, "direction", 0, 360, 1).onFinishChange(rerender);
-  // anim.add( options, "speed", 0, 100, 0.1).onFinishChange(rerender);
-  // anim.add( options, "rotation", 0, 100, 0.1).onFinishChange(rerender);
-  // const move = anim.addFolder("Movement");
-  // move.add( options, "parallax", 0, 10, 0.1).onFinishChange(rerender);
-  // move.add( options, "drift", 0, 10, 0.1).onFinishChange(rerender);
-  // move.add( options, "xVariance", 0, 50, 0.1).onFinishChange(rerender);
-  // move.add( options, "yVariance", 0, 50, 0.1).onFinishChange(rerender);
-  // const vis = gui.addFolder("Visual");
-  // vis.add( options, "glow", 0,50).onFinishChange(rerender);
-  // vis.add( options, "composition", composites).onFinishChange(rerender);
-  // const alpha = vis.addFolder("Alpha");
-  // alpha.add( options, "twinkle").onFinishChange(rerender);
-  // alpha.add( options, "minAlpha", -2, 2, 0.1).onFinishChange(rerender);
-  // alpha.add( options, "maxAlpha", -2, 2, 0.1).onFinishChange(rerender);
-  // alpha.add( options, "alphaSpeed", 0, 50, 1).onFinishChange(rerender);
-  // alpha.add( options, "alphaVariance", 0, 20, 1).onFinishChange(rerender);
-  // const color = vis.addFolder("Color");
-  // color.open();
-  // color.add(colorType, "type", colorOptions).onFinishChange(rerenderColors);
-  // color.addColor(colors, "color1").onFinishChange(rerenderColors);
-  // color.addColor(colors, "color2").onFinishChange(rerenderColors);
-  // color.addColor(colors, "color3").onFinishChange(rerenderColors);
-  // color.addColor(colors, "color4").onFinishChange(rerenderColors);
-  // color.addColor(colors, "color5").onFinishChange(rerenderColors);
-};
+      };
 
     </script>
 </body>
