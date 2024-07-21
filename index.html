@@ -31,7 +31,7 @@
         z-index: 1;
         /* linear-gradient(rgba(165, 196, 211, 0.3), #293743f2) */
         background-color: #fff;
-        background-image: url("/src/images/background/bg-1.jpg");
+        background-image: url("src/images/background/bg-1.jpg");
         background-size: cover;
         background-position: center center;
         transition: .5s;
@@ -129,7 +129,7 @@
         function replaceImage(){
             const app = document.getElementById('app');
             index = index < 5 ? index + 1 : 1;
-            app.style.backgroundImage = `url('/src/images/background/bg-${index}.jpg')`;
+            app.style.backgroundImage = `url('src/images/background/bg-${index}.jpg')`;
         }
         setInterval(replaceImage, 3000);
 
