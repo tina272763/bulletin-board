@@ -20,12 +20,12 @@
             <div class="swiper-slide">
               <img src="src/images/20240705113917464.jpg" alt="">
             </div>
-            <div class="swiper-slide">
+            <!-- <div class="swiper-slide">
               <img src="src/images/20240705113917464.jpg" alt="">
             </div>
             <div class="swiper-slide">
               <img src="src/images/20240705113917464.jpg" alt="">
-            </div>
+            </div> -->
           </div>
           <div class="swiper-pagination"></div>
           <!-- <div class="swiper-button-next"></div>
@@ -44,7 +44,7 @@
             index = index < 5 ? index + 1 : 1;
             app.style.backgroundImage = `url('src/images/background/bg-${index}.jpg')`;
         }
-        setInterval(replaceImage, 3000);
+        setInterval(replaceImage, 600000);
 
         var swiper = new Swiper(".mySwiper", {
             // navigation: {
