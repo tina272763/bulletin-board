@@ -17,8 +17,8 @@
       <div class="text">
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="src/images/20240705113917464.jpg" alt="">
+            <div class="swiper-slide" id="bulletin-slide">
+              <img src="src/images/bulletin/1.jpg" alt="">
             </div>
             <!-- <div class="swiper-slide">
               <img src="src/images/20240705113917464.jpg" alt="">
@@ -37,7 +37,32 @@
     <script src="src/js/sparticles.js"></script>
     <script src="src/js/dat.gui.min.js"></script>
     <script src="src/js/Stats.min.js"></script>
+    <script src="json/bulletin.js"></script>
     <script>
+
+      console.log(data);
+
+        // (() => {
+        //   console.log(document.querySelector('#bulletin-slide'));
+        // })();
+
+        // function fetchJSONData() {
+        //     fetch("json/bulletin.json")
+        //         .then((res) => {
+        //             if (!res.ok) {
+        //                 throw new Error
+        //                     (`HTTP error! Status: ${res.status}`);
+        //             }
+        //             return res.json();
+        //         })
+        //         .then((data) => 
+        //               console.log(data))
+        //         .catch((error) => 
+        //                console.error("Unable to fetch data:", error));
+        // }
+        // fetchJSONData();
+
+
         let index = 1;
         function replaceImage(){
             const app = document.getElementById('app');
