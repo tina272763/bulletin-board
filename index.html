@@ -16,17 +16,7 @@
     <main id="app">
       <div class="text">
         <div class="swiper mySwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide" id="bulletin-slide">
-              <img src="src/images/bulletin/1.jpg" alt="">
-            </div>
-            <!-- <div class="swiper-slide">
-              <img src="src/images/20240705113917464.jpg" alt="">
-            </div>
-            <div class="swiper-slide">
-              <img src="src/images/20240705113917464.jpg" alt="">
-            </div> -->
-          </div>
+          <div class="swiper-wrapper" id="bulletin-slide"></div>
           <div class="swiper-pagination"></div>
           <!-- <div class="swiper-button-next"></div>
           <div class="swiper-button-prev"></div> -->
@@ -37,32 +27,56 @@
     <script src="src/js/sparticles.js"></script>
     <script src="src/js/dat.gui.min.js"></script>
     <script src="src/js/Stats.min.js"></script>
-    <script src="json/bulletin.js"></script>
     <script>
 
-      console.log(data);
+        const handleBulletin = (data) => {
+          const el = document.querySelector('#bulletin-slide');
+          let html = '';
+          data.forEach((item) => {
+            html += `
+              <div class="swiper-slide">
+                <img src="data/announcement/${item.name}" alt="">
+              </div>
+            `
+          })
+          el.innerHTML = html;
+        }
 
-        // (() => {
-        //   console.log(document.querySelector('#bulletin-slide'));
-        // })();
+        function fetchJSONData() {
+            fetch("data/announcement/announcements.json")
+                .then((res) => {
+                    if (!res.ok) {
+                        throw new Error
+                            (`HTTP error! Status: ${res.status}`);
+                    }
+                    return res.json();
+                }).then((data) => {
+                    handleBulletin(data.data)
+                    console.log(data)                  
+                }).then((data) => {
+                  var swiper = new Swiper(".mySwiper", {
+                    // navigation: {
+                    //     nextEl: ".swiper-button-next",
+                    //     prevEl: ".swiper-button-prev",
+                    // },
+                    pagination: {
+                        el: ".swiper-pagination",
+                        clickable: true,
+                        renderBullet: function (index, className) {
+                        return '<span class="' + className + '">' + (index + 1) + "</span>";
+                        },
+                    },
+                    autoplay: {
+                      delay: 6000,
+                    },
+                  });
+                }).catch((error) => 
+                  console.error("Unable to fetch data:", error));
+        };
 
-        // function fetchJSONData() {
-        //     fetch("json/bulletin.json")
-        //         .then((res) => {
-        //             if (!res.ok) {
-        //                 throw new Error
-        //                     (`HTTP error! Status: ${res.status}`);
-        //             }
-        //             return res.json();
-        //         })
-        //         .then((data) => 
-        //               console.log(data))
-        //         .catch((error) => 
-        //                console.error("Unable to fetch data:", error));
-        // }
-        // fetchJSONData();
-
-
+        fetchJSONData();
+        setInterval(fetchJSONData, 300000);
+        
         let index = 1;
         function replaceImage(){
             const app = document.getElementById('app');
@@ -70,24 +84,6 @@
             app.style.backgroundImage = `url('src/images/background/bg-${index}.jpg')`;
         }
         setInterval(replaceImage, 600000);
-
-        var swiper = new Swiper(".mySwiper", {
-            // navigation: {
-            //     nextEl: ".swiper-button-next",
-            //     prevEl: ".swiper-button-prev",
-            // },
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-                renderBullet: function (index, className) {
-                return '<span class="' + className + '">' + (index + 1) + "</span>";
-                },
-            },
-            loop: true,
-            autoplay: {
-              delay: 2000,
-            },
-        });
 
         let colorType = {
           type: "multi"
@@ -125,7 +121,7 @@
           maxSize: 20,
           minAlpha: -0.2,
           minSize: 3,
-          parallax: 6,
+          parallax: 2,
           rotation: 0.5,
           shape: ["diamond"], // 動畫
           speed: 2.5,
