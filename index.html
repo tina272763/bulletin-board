@@ -1,210 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>新世代世紀館-公告</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="src/css/swiper-bundle.min.css"/>
-    <link rel="stylesheet" href="src/css/style.css">
+  <meta charset="utf-8">
+  <title>新世代世紀館-公告</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="src/css/swiper-bundle.min.css"/>
+  <link rel="stylesheet" href="src/css/style.css">
 </head>
 <body class="relative font-inter antialiased">
-    <img src="src/images/background/bg-1.jpg" style="display: none;" alt="">
-    <img src="src/images/background/bg-2.jpg" style="display: none;" alt="">
-    <img src="src/images/background/bg-3.jpg" style="display: none;" alt="">
-    <img src="src/images/background/bg-4.jpg" style="display: none;" alt="">
-    <img src="src/images/background/bg-5.jpg" style="display: none;" alt="">
-    <main id="app">
-      <div class="text">
-        <div class="swiper mySwiper">
+<main id="app" style="background-image: url('src/images/background/bg-2.jpg')">
+  <div class="container">
+    <section class="bulletin">
+      <div class="swiper mySwiper">
           <div class="swiper-wrapper" id="bulletin-slide"></div>
           <div class="swiper-pagination"></div>
-          <!-- <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div> -->
+      </div>      
+    </section>
+    <section class="clock">
+      <div></div>
+    </section>
+    <section class="calendar">
+      <div></div>
+    </section>
+    <section class="weather">
+      <div></div>
+    </section>
+  </div>
+</main>
+<script src="src/js/swiper-bundle.min.js"></script>
+<script src="src/js/sparticles.js"></script>
+<script src="src/js/dat.gui.min.js"></script>
+<script src="src/js/Stats.min.js"></script>
+<script src="src/js/sparticles-set.js"></script>
+<script>
+
+const handleBulletin = (data) => {
+  const el = document.querySelector('#bulletin-slide');
+  let html = '';
+  data.forEach((item) => {
+    html += `
+      <div class="swiper-slide">
+        <img src="data/announcement/${item.name}" alt="">
       </div>
-      </div>
-    </main>
-    <script src="src/js/swiper-bundle.min.js"></script>
-    <script src="src/js/sparticles.js"></script>
-    <script src="src/js/dat.gui.min.js"></script>
-    <script src="src/js/Stats.min.js"></script>
-    <script>
+    `
+  })
+  el.innerHTML = html;
+}
 
-        const handleBulletin = (data) => {
-          const el = document.querySelector('#bulletin-slide');
-          let html = '';
-          data.forEach((item) => {
-            html += `
-              <div class="swiper-slide">
-                <img src="data/announcement/${item.name}" alt="">
-              </div>
-            `
-          })
-          el.innerHTML = html;
-        }
-
-        function fetchJSONData() {
-            fetch("data/announcement/announcements.json")
-                .then((res) => {
-                    if (!res.ok) {
-                        throw new Error
-                            (`HTTP error! Status: ${res.status}`);
-                    }
-                    return res.json();
-                }).then((data) => {
-                    handleBulletin(data.data)
-                    console.log(data)                  
-                }).then((data) => {
-                  var swiper = new Swiper(".mySwiper", {
-                    // navigation: {
-                    //     nextEl: ".swiper-button-next",
-                    //     prevEl: ".swiper-button-prev",
-                    // },
-                    pagination: {
-                        el: ".swiper-pagination",
-                        clickable: true,
-                        renderBullet: function (index, className) {
-                        return '<span class="' + className + '">' + (index + 1) + "</span>";
-                        },
-                    },
-                    autoplay: {
-                      delay: 6000,
-                    },
-                  });
-                }).catch((error) => 
-                  console.error("Unable to fetch data:", error));
-        };
-
-        fetchJSONData();
-        setInterval(fetchJSONData, 300000);
-        
-        let index = 1;
-        function replaceImage(){
-            const app = document.getElementById('app');
-            index = index < 5 ? index + 1 : 1;
-            app.style.backgroundImage = `url('src/images/background/bg-${index}.jpg')`;
-        }
-        setInterval(replaceImage, 600000);
-
-        let colorType = {
-          type: "multi"
-        };
-
-        let colors = {
-          color1: "rgba(255,255,255,1)",
-          color2: "rgba(233,239,250,1)",
-          color3: "rgba(222,241,250,1)",
-          color4: "rgba(178,209,219,1)",
-          color5: "rgba(135,143,145,1)"
-        };
-
-        let options = {
-          alphaSpeed: 2,
-          alphaVariance: 1,
-          color: [colors.color1, colors.color2, colors.color3, colors.color4],
-          composition: "source-over",
-          count: 80,
-          direction: 160,
-          drift: 2,
-          glow: 50,
-          imageUrl: [
-            "https://assets.codepen.io/13471/snowflake.png",
-            "https://assets.codepen.io/13471/snowflake(1).png",
-            "https://assets.codepen.io/13471/snowflake(2).png",
-            "https://assets.codepen.io/13471/snowflake(3).png",
-            "https://assets.codepen.io/13471/snowflake(4).png",
-            "https://assets.codepen.io/13471/snowflake(5).png",
-            "https://assets.codepen.io/13471/snowflake(6).png",
-            "https://assets.codepen.io/13471/snowflake(7).png",
-            "https://assets.codepen.io/13471/snowflake(8).png",
-          ],
-          maxAlpha: 2,
-          maxSize: 20,
-          minAlpha: -0.2,
-          minSize: 3,
-          parallax: 2,
-          rotation: 0.5,
-          shape: ["diamond"], // 動畫
-          speed: 2.5,
-          style: "fill",
-          twinkle: false,
-          xVariance: 20,
-          yVariance: 20,
-        };
-
-        window.onload = function() {
-          initStats();
-          initSparticles();
-          initGui();
-        }
-
-        window.initSparticles = function() {
-          var $main = document.querySelector("main");
-          window.mySparticles = new Sparticles($main,options);
-        };
-
-        window.initStats = function() {
-          var stats = new Stats();
-          stats.domElement.classList.add("stats");
-          // document.body.appendChild(stats.domElement);
-          function statsDisplay() {
-            stats.begin();
-            stats.end();
-            requestAnimationFrame(statsDisplay);
-          }
-          requestAnimationFrame(statsDisplay);
-        };
-
-        window.initGui = function() {
-          const s = window.mySparticles;
-          const shapes = ["circle", "square", "triangle", "diamond", "line", "image"];
-          const styles = ["fill", "stroke", "both"];
-          const colorOptions = ["single", "multi", "rainbow"];
-          const composites = [
-            "source-over",
-            "source-in",
-            "source-out",
-            "source-atop",
-            "destination-over",
-            "destination-in",
-            "destination-out",
-            "destination-atop",
-            "lighter",
-            "copy",
-            "xor",
-            "multiply",
-            "screen",
-            "overlay",
-            "darken",
-            "color-dodge",
-            "color-burn",
-            "hard-light",
-            "soft-light",
-            "difference",
-            "exclusion",
-            "hue",
-            "saturation",
-            "color",
-            "luminosity"
-          ];
-          const rerender = () => {
-            window.mySparticles.destroy();
-            window.initSparticles();
-          };
-          var rerenderColors = function(v) {
-            if (colorType.type === "rainbow") {
-              options.color = "rainbow";
-            } else if (colorType.type === "single") {
-              options.color = colors.color1;
-            } else {
-              options.color = Object.keys(colors).map(i => {
-                return colors[i];
-              });
+function fetchJSONData() {
+    fetch("data/announcement/announcements.json")
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error
+                    (`HTTP error! Status: ${res.status}`);
             }
-            rerender();
-          };
-      };
+            return res.json();
+        }).then((data) => {
+            handleBulletin(data.data)
+            console.log(data)                  
+        }).then((data) => {
+          var swiper = new Swiper(".mySwiper", {
+            // navigation: {
+            //     nextEl: ".swiper-button-next",
+            //     prevEl: ".swiper-button-prev",
+            // },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+                renderBullet: function (index, className) {
+                  return '<span class="' + className + '">' + (index + 1) + "</span>";
+                },
+            },
+            autoplay: {
+              delay: 6000,
+            },
+          });
+        }).catch((error) => 
+          console.error("Unable to fetch data:", error));
+};
 
-    </script>
+fetchJSONData();
+setInterval(fetchJSONData, 300000);
+        
+let index = 1;
+function replaceImage(){
+    const app = document.getElementById('app');
+    index = index < 5 ? index + 1 : 1;
+    app.style.backgroundImage = `url('src/images/background/bg-${index}.jpg')`;
+}
+setInterval(replaceImage, 600000);
+
+// 背景圖預先載入
+const imgPreloadArr = [];
+(() => {
+  for (let i = 1; i <= 5; i++) { 
+    const img = new Image();
+    img.src = `src/images/background/bg-${i}.jpg`;
+    imgPreloadArr.push(img);
+  }
+})();
+
+</script>
 </body>
-
 </html>
