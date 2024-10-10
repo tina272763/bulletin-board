@@ -81,7 +81,7 @@ main > .container {
   'bulletin clock'
   'bulletin calendar'
   'bulletin weather';
-  grid-template-columns: 80% auto;
+  grid-template-columns: 80% 19.5%;
   gap: 8px;
   padding: 8px;
 }
@@ -121,7 +121,7 @@ main > .container > section{
 
 .calendar-content {
   position: relative;
-  width: 15vw;
+  width: 20vw;
   cursor: default;
   user-select: none;
   margin-top: 40px;
@@ -189,7 +189,7 @@ main > .container > section{
   .day-name {
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 30px;
   }
   
   .day {
