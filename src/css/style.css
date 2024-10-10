@@ -165,7 +165,7 @@ main > .container > section{
   
   .page {
     position: relative;
-    padding: 8px 0;
+    padding: 12px 0;
     background: #eee;
     border-radius: 0 0 35px 35px;
     box-shadow: 0 8px 0 #15181f;
@@ -196,7 +196,7 @@ main > .container > section{
   .day {
     font-size: 100px;
     font-weight: 700;
-    /* margin: 4px 0; */
+    margin: 2px 0;
   }
   
   .year {
