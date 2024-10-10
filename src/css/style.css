@@ -106,6 +106,7 @@ main > .container > section{
   height: 32vh;
   > div{
     margin-top: 11vh;
+    margin-left: 1.5vh;
   }
 }
 
@@ -121,7 +122,7 @@ main > .container > section{
 
 .calendar-content {
   position: relative;
-  width: 20vw;
+  width: 18vw;
   cursor: default;
   user-select: none;
   margin-top: 40px;
@@ -199,7 +200,7 @@ main > .container > section{
   }
   
   .year {
-    font-size: 12px;
+    font-size: 14px;
   }
   
   .tear {
