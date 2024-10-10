@@ -11,15 +11,16 @@
 <main id="app" style="background-image: url('src/images/background/summer/bg-1.jpg')">
   <div class="container">
     <section class="bulletin">
-      <div class="swiper mySwiper">
+      <!-- <div class="swiper mySwiper">
           <div class="swiper-wrapper" id="bulletin-slide"></div>
           <div class="swiper-pagination"></div>
-      </div>      
+      </div> -->
+      <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTKlmkq1h_ofP4RN-a-Hg9E9Wkd1UKSJe6kbudh_Po7kJy1Rf20i6J1S0FDeuhRgFyI9rO47JxseEoG/embed?start=true&loop=true&delayms=6000" frameborder="0" width="98%" height="98%" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
     </section>
     <section class="clock">
       <div>
         <svg version="1.1" id="clock" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-        height="100%" viewBox="50 50 400 500" 
+        height="50vh" viewBox="50 50 400 500" 
         xml:space="preserve">
           <circle id="face" fill="#F4F3ED" cx="243.869" cy="250.796" r="130.8"/>
           <path id="rim" fill="#383838" d="M243.869,101.184c-82.629,0-149.612,66.984-149.612,149.612c0,82.629,66.983,149.612,149.612,149.612
@@ -153,10 +154,16 @@
       </div>
     </section>
     <section class="calendar">
-      <div></div>
+      <!-- <div> -->
+        <div class="calendar-content">
+          <div class="pages"></div>
+        </div>
+      <!-- </div> -->
     </section>
     <section class="weather">
-      <div></div>
+      <!-- <div> -->
+        <img src="src/images/coming-soon.png" width="60%" alt="">
+      <!-- </div> -->
     </section>
   </div>
 </main>
@@ -165,6 +172,7 @@
 <script src="src/js/dat.gui.min.js"></script>
 <script src="src/js/Stats.min.js"></script>
 <script src="src/js/sparticles-set.js"></script>
+<script src="src/js/calendar.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.2.0/snap.svg-min.js"></script>
 <script>
 
