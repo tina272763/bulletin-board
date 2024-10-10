@@ -189,12 +189,13 @@ main > .container > section{
   .day-name {
     text-transform: uppercase;
     font-weight: 600;
+    font-size: 20px;
   }
   
   .day {
     font-size: 100px;
     font-weight: 700;
-    margin: -8px 0;
+    margin: 8px 0;
   }
   
   .year {
