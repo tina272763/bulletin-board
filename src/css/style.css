@@ -190,7 +190,7 @@ main > .container > section{
   .day {
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 32px;
+    font-size: 28px;
   }
   
   .date {
