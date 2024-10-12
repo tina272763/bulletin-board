@@ -125,12 +125,12 @@ main > .container > section{
   width: 17vw;
   cursor: default;
   user-select: none;
-  margin-top: 34px;
+  margin-top: 40px;
   &::before,
   &::after {
     content: '';
     position: absolute;
-    top: -24px;
+    top: -28px;
     left: 40px;
     width: 10px;
     height: 10px;
@@ -154,7 +154,7 @@ main > .container > section{
       content: '';
       position: absolute;
       width: 100%;
-      height: 40px;
+      height: 45px;
       background: #d9383c;
       bottom: 100%;
       left: 0;
@@ -190,15 +190,16 @@ main > .container > section{
   .day {
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 24px;
+    font-size: 32px;
   }
   
   .date {
-    font-size: 80px;
+    font-size: 100px;
     font-weight: 700;
+    margin: 2px 0;
   }
   
   .year {
-    font-size: 16px;
-  }
+    font-size: 20px;
+  } 
 }
