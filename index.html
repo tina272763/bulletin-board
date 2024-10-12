@@ -156,7 +156,14 @@
     <section class="calendar">
       <!-- <div> -->
         <div class="calendar-content">
-          <div class="pages"></div>
+          <div class="pages">
+            <div class="page">
+              <div class="month" id="month"></div>
+              <div class="date" id="date"></div>
+              <div class="day" id="day"></div>
+              <div class="year" id="year"></div>              
+            </div>
+          </div>
         </div>
       <!-- </div> -->
     </section>
@@ -237,7 +244,7 @@ const imgPreloadArr = [];
 (() => {
   for (let i = 1; i <= 5; i++) { 
     const img = new Image();
-    img.src = `src/images/background/bg-${i}.jpg`;
+    img.src = `src/images/background/summer/bg-${i}.jpg`;
     imgPreloadArr.push(img);
   }
 })();

@@ -1,65 +1,38 @@
-const pages = document.querySelector('.pages');
-const locale = window.navigator.language || 'en-us'
+var date = document.getElementById("date"),
+  day = document.getElementById("day"),
+  month = document.getElementById("month"),
+  year = document.getElementById("year"),
+  days = [
+    "星期日",
+    "星期一",
+    "星期二",
+    "星期三",
+    "星期四",
+    "星期五",
+    "星期六"
+  ],
+  months = [
+    "一月",
+    "二月",
+    "三月",
+    "四月",
+    "五月",
+    "六月",
+    "七月",
+    "八月",
+    "九月",
+    "十月",
+    "十一月",
+    "十二月"
+  ],
+  box = document.getElementById("box");
 
-let date = new Date();
-let dayNum = date.getDate();
-let month = date.getMonth();
-let dayName = date.toLocaleString(locale, { weekday: 'long' });
-let monthName = date.toLocaleString(locale, { month: 'long' });
-let year = date.getFullYear();
-
-function daysInMonth (month, year) {
-  return new Date(year, month + 1, 0).getDate();
+function update() {
+    let now = new Date();
+    date.innerText = now.getDate();
+    day.innerText = days[now.getDay()];
+    month.innerText = months[now.getMonth()];
+    year.innerText = now.getFullYear();
 }
 
-function getNewDate () {
-  if (dayNum < daysInMonth(month, year)) {
-    dayNum++;
-  } else {
-    dayNum = 1;
-  } 
-  if (dayNum === 1 && month < 11) {
-    month++;
-  } else if (dayNum === 1 && month === 11) {
-    month = 0;
-  }
-  if (dayNum ===1 && month === 0) {
-    year++;
-  }
-  const newDate = new Date(year, month, dayNum);
-  dayName = newDate.toLocaleString('en-us', { weekday: 'long' });
-  monthName = newDate.toLocaleString('en-us', { month: 'long' });
-}
-
-function handleClick (e) {
-  getNewDate();
-  updateCalendar(e.target);
-}
-
-function updateCalendar (target) {
-  if (target && target.classList.contains('page')) {
-    target.classList.add('tear');
-    setTimeout(() => {
-      pages.removeChild(target);
-    }, 800);
-  } else {
-    return;
-  }
-  renderPage();
-}
-
-function renderPage () {
-  const newPage = document.createElement('div');
-  newPage.classList.add('page');
-  newPage.innerHTML = `
-    <div class="month">${monthName}</div>
-    <div class="day">${dayNum}</div>
-    <div class="day-name">${dayName}</div>
-    <div class="year">${year}</div>
-  `;
-  pages.appendChild(newPage);
-}
-
-renderPage();
-
-pages.addEventListener('click', handleClick);
+setInterval(update, 1000);
